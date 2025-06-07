@@ -23,3 +23,11 @@ Username:awww
 
 Password:123456
 
+
+
+###################
+Login Menggunakan url index.php
+###################
+
+http://localhost/CI/index.php/auth/login
+
