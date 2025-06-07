@@ -28,7 +28,6 @@
                             <h3 class="card-title">Form Tambah Sales</h3>
                         </div>
                         <!-- /.card-header -->
-                        <!-- form start -->
                         <?= form_open('sales/store'); ?>
                             <div class="card-body">
                                 <div class="form-group">

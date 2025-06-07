@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Sales_model extends CI_Model {
 
     private $table = 'sales_persons';
-    private $pk = 'id_sales_person'; // Primary key
+    private $pk = 'id_sales_person'; 
 
     public function __construct() {
         parent::__construct();
@@ -34,14 +34,12 @@ class Sales_model extends CI_Model {
         return $this->db->delete($this->table);
     }
     public function is_sales_person_in_use($id_sales_person) {
-        // Contoh pemeriksaan di tabel sales_orders
-        // Sesuaikan nama tabel dan kolom foreign key jika berbeda
-        $this->db->where('id_sales_person', $id_sales_person);
-        $query = $this->db->get('sales_orders'); // Ganti 'sales_orders' jika nama tabelnya berbeda
 
+        $this->db->where('id_sales_person', $id_sales_person);
+        $query = $this->db->get('sales_orders'); 
         if ($query->num_rows() > 0) {
-            return true; // Sales person digunakan
+            return true; 
         }
-        return false; // Sales person tidak digunakan
+        return false; 
     }
 }

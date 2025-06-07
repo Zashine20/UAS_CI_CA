@@ -28,7 +28,6 @@
                             <h3 class="card-title">Form Edit Produk</h3>
                         </div>
                         <!-- /.card-header -->
-                        <!-- form start -->
                         <?= form_open('produk/update/' . $produk->id_produk); ?>
                             <div class="card-body">
                                 <div class="form-group">

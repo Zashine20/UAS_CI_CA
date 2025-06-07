@@ -28,7 +28,6 @@
                             <h3 class="card-title">Form Edit Sales</h3>
                         </div>
                         <!-- /.card-header -->
-                        <!-- form start -->
                         <?= form_open('sales/update/' . $sales_person->id_sales_person); ?>
                             <div class="card-body">
                                 <div class="form-group">

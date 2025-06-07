@@ -258,32 +258,31 @@
             </ul> <!-- /.nav-treeview for Dashboard -->
           </li> <!-- /.nav-item for Dashboard -->
 
-          <!-- Sales Order Menu -->
           <?php if ($this->session->userdata('role') == 'Admin') { ?>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="far fa-folder-open nav-icon"></i> <!-- Icon for Sales Order -->
+              <i class="far fa-folder-open nav-icon"></i> 
               <p>
                 Manajemen Data
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
-              <li class="nav-item"> <!-- Manajemen Data -->
+              <li class="nav-item"> 
                 <a href="<?= base_url('index.php/produk');?>" class="nav-link">
-                  <i class="fas fa-box nav-icon"></i> <!-- Icon for Manajemen Data -->
+                  <i class="fas fa-box nav-icon"></i> 
                   <p>Produk</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?= base_url('index.php/pelanggan');?>" class="nav-link">
-                  <i class="fas fa-users nav-icon"></i> <!-- Icon for Pelanggan -->
+                  <i class="fas fa-users nav-icon"></i> 
                   <p>Pelanggan</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="<?= base_url('index.php/sales');?>" class="nav-link">
-                  <i class="fas fa-user-tie nav-icon"></i> <!-- Icon for Sales -->
+                  <i class="fas fa-user-tie nav-icon"></i> 
                   <p>Sales</p>
                 </a>
               </li>
@@ -296,13 +295,11 @@
             </ul>
           </li>
           <?php } ?>
-          <!-- End Manajemen Data Menu -->
 
-          <!-- Sales Order Menu -->
           <?php if ($this->session->userdata('role') == 'Sales') { ?>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-shopping-cart"></i> <!-- Icon for Sales Order -->
+              <i class="nav-icon fas fa-shopping-cart"></i> 
               <p>
                 Sales Order
                 <i class="right fas fa-angle-left"></i>
@@ -324,13 +321,11 @@
             </ul>
           </li>
           <?php } ?>
-          <!-- End Sales Order Menu -->
 
-          <!-- Laporan Menu -->
           <?php if ($this->session->userdata('role') == 'Manager') { ?>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-chart-line"></i> <!-- Icon for Laporan -->
+              <i class="nav-icon fas fa-chart-line"></i> 
               <p>
                 Laporan
                 <i class="right fas fa-angle-left"></i>
@@ -370,7 +365,7 @@
               <p>Logout</p>
             </a>
           </li>
-          <!-- End Laporan Menu -->
+
         </ul> <!-- /.nav nav-pills nav-sidebar flex-column -->
       </nav> <!-- This was original line 250, now correctly placed -->
       <!-- /.sidebar-menu -->

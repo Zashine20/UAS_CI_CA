@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Pelanggan_model extends CI_Model {
 
     private $table = 'pelanggan';
-    private $pk = 'id_pelanggan'; // Primary key
+    private $pk = 'id_pelanggan'; 
 
     public function __construct() {
         parent::__construct();
@@ -12,7 +12,7 @@ class Pelanggan_model extends CI_Model {
     }
 
     public function get_all_pelanggan() {
-        $this->db->order_by($this->pk, 'DESC'); // Tampilkan data terbaru dulu
+        $this->db->order_by($this->pk, 'DESC'); 
         return $this->db->get($this->table)->result();
     }
 
@@ -34,12 +34,10 @@ class Pelanggan_model extends CI_Model {
         return $this->db->delete($this->table);
     }
     public function is_pelanggan_in_use($id_pelanggan) {
-        // Contoh pemeriksaan di tabel sales_orders
-        // Sesuaikan nama tabel dan kolom foreign key jika berbeda
         $this->db->where('id_pelanggan', $id_pelanggan);
-        $query = $this->db->get('sales_orders'); // Ganti 'sales_orders' jika nama tabelnya berbeda
+        $query = $this->db->get('sales_orders');
         if ($query->num_rows() > 0) {
-            return true; // Pelanggan digunakan
+            return true; 
         }
         return false;
     }

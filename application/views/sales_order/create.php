@@ -78,7 +78,6 @@
                     </div>
                 </div>
 
-                <!-- Order Items -->
                 <div class="col-md-12">
                     <div class="card card-info">
                         <div class="card-header"><h3 class="card-title">Item Produk</h3></div>

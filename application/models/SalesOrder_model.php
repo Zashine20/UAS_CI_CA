@@ -31,13 +31,11 @@ class SalesOrder_model extends CI_Model {
     public function insert_order($order_data, $items_data) {
         $this->db->trans_start();
 
-        // Insert order header
         $this->db->insert($this->table_orders, $order_data);
         $order_id = $this->db->insert_id();
 
-        // Insert order items
         if ($order_id && !empty($items_data)) {
-            foreach ($items_data as &$item) { // Pass by reference to modify
+            foreach ($items_data as &$item) { 
                 $item['id_sales_order'] = $order_id;
             }
             $this->db->insert_batch($this->table_items, $items_data);
@@ -88,11 +86,7 @@ class SalesOrder_model extends CI_Model {
         return $this->db->update($this->table_orders, ['status_order' => $status, 'updated_at' => date('Y-m-d H:i:s')]);
     }
 
-    // Anda bisa menambahkan fungsi update dan delete order jika diperlukan
-    // public function update_order($id_sales_order, $order_data, $items_data) { ... }
-    // public function delete_order($id_sales_order) { ... }
 
-    // Helper untuk mendapatkan data master
     public function get_all_pelanggan() {
         return $this->db->get('pelanggan')->result();
     }
@@ -100,11 +94,8 @@ class SalesOrder_model extends CI_Model {
         return $this->db->get('sales_persons')->result();
     }
     public function get_all_active_produk() {
-        // Anda mungkin ingin menambahkan filter produk yang aktif atau memiliki stok
         return $this->db->get('produk')->result();
     }
-
-    // --- Metode untuk Laporan ---
 
     public function get_report_per_sales($id_sales_person = null, $start_date = null, $end_date = null) {
         $this->db->select('so.nomor_order, so.tanggal_order, p.nama_pelanggan, sp.nama_sales, pr.nama_produk, soi.jumlah, soi.harga_saat_order, soi.subtotal, so.status_order');
