@@ -30,7 +30,7 @@
                         <div class="row">
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Sales Person:</label>
+                                    <label>Sales:</label>
                                     <select name="id_sales_person" class="form-control select2" style="width: 100%;">
                                         <option value="">Semua Sales</option>
                                         <?php foreach($sales_persons_list as $sp): ?>
