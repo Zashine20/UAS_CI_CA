@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Produk_model extends CI_Model {
 
     private $table = 'produk';
-    private $pk = 'id_produk'; 
+    private $pk = 'id_produk'; // Primary key
 
     public function __construct() {
         parent::__construct();
@@ -12,7 +12,7 @@ class Produk_model extends CI_Model {
     }
 
     public function get_all_produk() {
-        $this->db->order_by($this->pk, 'DESC'); 
+        $this->db->order_by($this->pk, 'DESC'); // Tampilkan data terbaru dulu
         return $this->db->get($this->table)->result();
     }
 
@@ -36,14 +36,20 @@ class Produk_model extends CI_Model {
 
     public function kurangi_stok($id_produk, $jumlah_pengurangan) {
         $this->db->where($this->pk, $id_produk);
-        $this->db->set('stok_produk', 'stok_produk - ' . (int)$jumlah_pengurangan, FALSE);
+        $this->db->set('stok_produk', 'stok_produk - ' . (int)$jumlah_pengurangan, FALSE); // FALSE agar tidak di-escape
         return $this->db->update($this->table);
     }
+
+    // Di Produk_model.php (jika ingin menambahkan)
+    public function count_all_produk() {
+    return $this->db->count_all_results('produk'); // Ganti 'produk' dengan nama tabel Anda
+    }
+
     public function is_produk_in_use($id_produk) {
         $this->db->where('id_produk', $id_produk);
-        $query = $this->db->get('sales_order_items'); 
+        $query = $this->db->get('sales_order_items'); // Ganti 'sales_orders' jika nama tabelnya berbeda
         if ($query->num_rows() > 0) {
-            return true; 
+            return true; // Pelanggan digunakan
         }
         return false;
     }

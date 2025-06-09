@@ -31,11 +31,13 @@ class SalesOrder_model extends CI_Model {
     public function insert_order($order_data, $items_data) {
         $this->db->trans_start();
 
+        // Insert order header
         $this->db->insert($this->table_orders, $order_data);
         $order_id = $this->db->insert_id();
 
+        // Insert order items
         if ($order_id && !empty($items_data)) {
-            foreach ($items_data as &$item) { 
+            foreach ($items_data as &$item) { // Pass by reference to modify
                 $item['id_sales_order'] = $order_id;
             }
             $this->db->insert_batch($this->table_items, $items_data);
@@ -86,7 +88,11 @@ class SalesOrder_model extends CI_Model {
         return $this->db->update($this->table_orders, ['status_order' => $status, 'updated_at' => date('Y-m-d H:i:s')]);
     }
 
+    // Anda bisa menambahkan fungsi update dan delete order jika diperlukan
+    // public function update_order($id_sales_order, $order_data, $items_data) { ... }
+    // public function delete_order($id_sales_order) { ... }
 
+    // Helper untuk mendapatkan data master
     public function get_all_pelanggan() {
         return $this->db->get('pelanggan')->result();
     }
@@ -94,8 +100,11 @@ class SalesOrder_model extends CI_Model {
         return $this->db->get('sales_persons')->result();
     }
     public function get_all_active_produk() {
+        // Anda mungkin ingin menambahkan filter produk yang aktif atau memiliki stok
         return $this->db->get('produk')->result();
     }
+
+    // --- Metode untuk Laporan ---
 
     public function get_report_per_sales($id_sales_person = null, $start_date = null, $end_date = null) {
         $this->db->select('so.nomor_order, so.tanggal_order, p.nama_pelanggan, sp.nama_sales, pr.nama_produk, soi.jumlah, soi.harga_saat_order, soi.subtotal, so.status_order');
@@ -141,6 +150,16 @@ class SalesOrder_model extends CI_Model {
         return $this->db->get()->result();
     }
 
+    // Di SalesOrder_model.php
+    public function get_total_pendapatan() {
+    $this->db->select_sum('total_harga'); // Asumsi kolom total per order adalah 'total_harga'
+    $query = $this->db->get('sales_orders'); // Asumsi tabel sales order adalah 'sales_orders'
+    if ($query->num_rows() > 0) {
+        return $query->row()->total_harga ? $query->row()->total_harga : 0;
+    }
+    return 0;
+    }
+
     public function get_report_per_period($start_date, $end_date) {
         $this->db->select('so.nomor_order, so.tanggal_order, p.nama_pelanggan, sp.nama_sales, SUM(soi.subtotal) as total_order, so.status_order');
         $this->db->from('sales_orders so');
@@ -152,6 +171,18 @@ class SalesOrder_model extends CI_Model {
         $this->db->where_in('so.status_order', ['dikirim', 'selesai']);
         $this->db->group_by('so.id_sales_order');
         $this->db->order_by('so.tanggal_order', 'ASC');
+        return $this->db->get()->result();
+    }
+
+    public function get_summary_sold_products() {
+        $this->db->select('pr.nama_produk, pr.kode_produk, pr.harga_produk, SUM(soi.jumlah) as total_jumlah_terjual, SUM(soi.subtotal) as total_pendapatan_produk');
+        $this->db->from('sales_order_items soi');
+        $this->db->join('sales_orders so', 'soi.id_sales_order = so.id_sales_order', 'inner');
+        $this->db->join('produk pr', 'soi.id_produk = pr.id_produk', 'inner');
+        // Anggap produk terjual jika status order 'dikirim' atau 'selesai'
+        $this->db->where_in('so.status_order', ['dikirim', 'selesai']);
+        $this->db->group_by('pr.id_produk, pr.nama_produk, pr.kode_produk');
+        $this->db->order_by('total_jumlah_terjual', 'DESC'); // Tampilkan produk paling banyak terjual di atas
         return $this->db->get()->result();
     }
 }

@@ -88,9 +88,9 @@ class auth extends CI_Controller {
                         'profile_picture' => $user['profile_picture'] 
                     ];
                     $this->session->set_userdata($data);
-                    if($user['role'] == 'admin'){
+                    if($user['role'] == 'Admin'){
                         $this->session->set_flashdata('success', 'Login berhasil');
-                        redirect('dashboard'); 
+                        redirect('dashboard_user'); 
                     } else {
                         $this->session->set_flashdata('success', 'Login berhasil');
                         redirect('dashboard');

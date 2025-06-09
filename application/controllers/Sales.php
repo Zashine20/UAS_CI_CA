@@ -62,7 +62,7 @@ class Sales extends CI_Controller {
         $data['sales_person'] = $this->Sales_model->get_sales_person_by_id($id_sales_person);
 
         if (!$data['sales_person']) {
-            $this->session->set_flashdata('error', 'Sales tidak ditemukan.');
+            $this->session->set_flashdata('error', 'Sales person tidak ditemukan.');
             redirect('sales');
         }
 
@@ -89,9 +89,9 @@ class Sales extends CI_Controller {
                 'nama_sales' => $this->input->post('nama_sales')
             ];
             if ($this->Sales_model->update_sales_person($id_sales_person, $data_update)) {
-                $this->session->set_flashdata('success', 'Data sales berhasil diperbarui.');
+                $this->session->set_flashdata('success', 'Data sales person berhasil diperbarui.');
             } else {
-                $this->session->set_flashdata('error', 'Gagal memperbarui data sales.');
+                $this->session->set_flashdata('error', 'Gagal memperbarui data sales person.');
             }
             redirect('sales');
         }
@@ -102,11 +102,21 @@ class Sales extends CI_Controller {
             $this->session->set_flashdata('error', 'Sales tidak dapat dihapus karena masih terkait dengan data order.');
         } else {
             if ($this->Sales_model->delete_sales_person($id_sales_person)) {
-                $this->session->set_flashdata('success', 'Sales berhasil dihapus.');
+                $this->session->set_flashdata('success', 'Sales person berhasil dihapus.');
             } else {
                 $this->session->set_flashdata('error', 'Gagal menghapus sales person.');
             }
         }
         redirect('sales');
+    }
+
+    public function get_json($id_sales_person) {
+        header('Content-Type: application/json');
+        $sales_person = $this->Sales_model->get_sales_person_by_id($id_sales_person);
+        if ($sales_person) {
+            echo json_encode(['success' => true, 'data' => $sales_person]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Sales person tidak ditemukan.']);
+        }
     }
 }

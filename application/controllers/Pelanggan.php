@@ -108,4 +108,14 @@ class Pelanggan extends CI_Controller {
         }
         redirect('pelanggan');
     }
+
+    public function get_json($id_pelanggan) {
+        header('Content-Type: application/json');
+        $pelanggan = $this->Pelanggan_model->get_pelanggan_by_id($id_pelanggan);
+        if ($pelanggan) {
+            echo json_encode(['success' => true, 'data' => $pelanggan]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Pelanggan tidak ditemukan.']);
+        }
+    }
 }

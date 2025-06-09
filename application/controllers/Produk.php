@@ -43,7 +43,8 @@ class Produk extends CI_Controller {
         $this->form_validation->set_rules('stok_produk', 'Stok Produk', 'required|integer|greater_than_equal_to[0]');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->create(); 
+            $this->create();
+        } else {
             $data_insert = [
                 'kode_produk' => $this->input->post('kode_produk'),
                 'nama_produk' => $this->input->post('nama_produk'),
@@ -114,5 +115,15 @@ class Produk extends CI_Controller {
             }
         }
         redirect('produk');
+    }
+
+    public function get_json($id_produk) {
+        header('Content-Type: application/json');
+        $produk = $this->Produk_model->get_produk_by_id($id_produk);
+        if ($produk) {
+            echo json_encode(['success' => true, 'data' => $produk]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Produk tidak ditemukan.']);
+        }
     }
 }
