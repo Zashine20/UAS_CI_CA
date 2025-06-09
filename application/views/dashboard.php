@@ -85,8 +85,8 @@
                       <th>Kode Produk</th>
                       <th>Nama Produk</th>
                       <th>Harga</th>
-                      <th>Total Jumlah Terjual</th>
-                      <th>Total Pendapatan dari Produk</th>
+                      <th>Terjual</th>
+                      <th>Total Pendapatan Produk</th>
                     </tr>
                   </thead>
                   <tbody>
