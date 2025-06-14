@@ -29,5 +29,5 @@ Password:123456
 Login Menggunakan url index.php
 ###################
 
-http://localhost/CI/index.php/auth/login
+http://localhost/CI/UAS_CI_CA/index.php/auth/login
 
