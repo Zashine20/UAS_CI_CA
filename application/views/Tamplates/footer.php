@@ -211,8 +211,7 @@
             const status = this.dataset.status;
 
             Swal.fire({
-                title: 'Konfirmasi Perubahan Status',
-                text: `Anda yakin ingin mengubah status order menjadi "${status}"?`,
+                title: `Anda yakin ingin mengubah status order menjadi "${status}"?`,
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',

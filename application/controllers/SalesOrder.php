@@ -97,7 +97,7 @@ class SalesOrder extends CI_Controller {
                 foreach ($items_data as $item) {
                     $this->Produk_model->kurangi_stok($item['id_produk'], $item['jumlah']);
                 }
-                $this->session->set_flashdata('success', 'Sales order berhasil dibuat dengan nomor: ' . $order_data['nomor_order']);
+                $this->session->set_flashdata('success', 'Order berhasil dibuat dengan nomor: ' . $order_data['nomor_order']);
                 redirect('salesorder/view/' . $order_id);
             } else {
                 $this->session->set_flashdata('error', 'Gagal membuat sales order.');
