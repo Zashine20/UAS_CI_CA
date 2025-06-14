@@ -74,13 +74,13 @@
                             <p>Status saat ini: <strong><?= ucfirst(htmlspecialchars($order->status_order, ENT_QUOTES, 'UTF-8')); ?></strong></p>
                             <?php if($order->status_order != 'selesai' && $order->status_order != 'dibatalkan'): ?>
                             <div class="btn-group">
-                                <?php if($order->status_order == 'draft'): ?>
-                                <a href="<?= base_url('index.php/salesorder/update_status/'.$order->id_sales_order.'/dikirim'); ?>" class="btn btn-info" onclick="return confirm('Anda yakin ingin mengubah status menjadi Dikirim?')">Tandai Dikirim</a>
+                                <?php if($order->status_order == 'draft' || $order->status_order == 'pending'): ?>
+                                <a href="#" data-url="<?= base_url('index.php/salesorder/update_status/'.$order->id_sales_order.'/dikirim'); ?>" data-status="Dikirim" class="btn btn-info update-status-btn">Tandai Dikirim</a>
                                 <?php endif; ?>
                                 <?php if($order->status_order == 'dikirim' || $order->status_order == 'draft'): ?>
-                                <a href="<?= base_url('index.php/salesorder/update_status/'.$order->id_sales_order.'/selesai'); ?>" class="btn btn-success" onclick="return confirm('Anda yakin ingin mengubah status menjadi Selesai?')">Tandai Selesai</a>
+                                <a href="#" data-url="<?= base_url('index.php/salesorder/update_status/'.$order->id_sales_order.'/selesai'); ?>" data-status="Selesai" class="btn btn-success update-status-btn">Tandai Selesai</a>
                                 <?php endif; ?>
-                                <a href="<?= base_url('index.php/salesorder/update_status/'.$order->id_sales_order.'/dibatalkan'); ?>" class="btn btn-danger" onclick="return confirm('Anda yakin ingin mengubah status menjadi Dibatalkan?')">Tandai Dibatalkan</a>
+                                <a href="#" data-url="<?= base_url('index.php/salesorder/update_status/'.$order->id_sales_order.'/dibatalkan'); ?>" data-status="Dibatalkan" class="btn btn-danger update-status-btn">Tandai Dibatalkan</a>
                             </div>
                             <?php else: ?>
                                 <p>Order sudah <?= $order->status_order == 'selesai' ? 'selesai' : 'dibatalkan'; ?>.</p>
