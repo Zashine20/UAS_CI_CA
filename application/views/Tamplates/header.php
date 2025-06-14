@@ -199,6 +199,12 @@
                 </a>
               </li>
               <li class="nav-item">
+                <a href="<?= base_url('index.php/salesorder');?>" class="nav-link">
+                  <i class="fas fa-list-alt nav-icon"></i>
+                  <p>Daftar Order</p>
+                </a>
+              </li>
+              <li class="nav-item">
                 <a href="<?= base_url('index.php/admin');?>" class="nav-link">
                   <i class="nav-icon fas fa-users-cog"></i>
                   <p>Daftar Users</p>

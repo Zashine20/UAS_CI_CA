@@ -17,7 +17,8 @@ class SalesOrder extends CI_Controller {
         if (!$this->session->userdata('logged_in')) {
             redirect('auth/login');
         }
-        if ($this->session->userdata('role') !== 'Sales') {
+        $allowed_roles = ['Sales', 'Admin'];
+        if (!in_array($this->session->userdata('role'), $allowed_roles)) {
             $this->session->set_flashdata('error', 'Anda tidak memiliki hak akses ke halaman ini.');
             redirect('dashboard');
         }
